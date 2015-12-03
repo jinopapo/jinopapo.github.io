@@ -9,11 +9,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>All Posts - My Octopress Blog</title>
+  <title>All Posts - とてもつらい</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content=" All Posts ">
+  <meta name="description" content="All Posts window8.1でxubuntuをデュアルブート windows8.1でxubuntuをデュアルブートする時にハマった。
+自分の場合はグラボ側にメインのモニターを繋いでいて、当然xubuntuにはGPUのドライバーが入っていないので、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +26,7 @@
   <link rel="canonical" href="http://jinopapo.github.io/posts">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="とてもつらい" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -50,6 +51,51 @@
 
   <div class="article-list">
     <div class="container">
+      
+      
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <article>
+  <h2><a href="/blog/2015/12/03/window8-dot-1dexubuntuwodeyuarubuto/">window8.1でxubuntuをデュアルブート</a></h2>
+  
+  <p>
+    <p>windows8.1でxubuntuをデュアルブートする時にハマった。
+自分の場合はグラボ側にメインのモニターを繋いでいて、当然xubuntuにはGPUのドライバーが入っていないので、ちょっとこっとエラーのメッセージが出てその後、何も出力されなくなるってことになった。
+最初の数時間はエラーメッセージに気が付かなくて、いろいろいじりまわしてたけどマザボ側の出力に変えるだけで解決。
+ようやくxubuntuが起動し、インストール。
+これはすんなりいった。
+その後、なんやかんやGPUのドライバーを入れwindowの起動を確認し、その日は終了。
+次の日立ち上げるとwindowしかた立ち上がらず,xubuntuはHDD上には存在しているが起動するデバイスが存在しないと言われ立ち上がらず。
+調べてみると、windpow8は、windowを起動するたびにwindowのブートローダーを最優先にするらしく一回windowsを起動してしまうと、grubの優先度が下がり見えなくなってしまいubuntuが起動できなくなる仕様らしい。
+これを解決するにはwindowsのブートローダーを書き換えてubuntuをwindowsのブートローダーから立ち上がるようにするか、windowのブートローダーをgrubで上書きするのがいいらしい。</p>
+
+
+  </p>
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-12-03T00:56:30+09:00" pubdate data-updated="true"></time>
+    
+
+
+  </span>
+
+  
+</article>
+
+        </div>
+      </div>
       
     </div>
   </div>
