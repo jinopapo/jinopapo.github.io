@@ -4,7 +4,7 @@
   <title><![CDATA[とてもつらい]]></title>
   <link href="http://jinopapo.github.io/atom.xml" rel="self"/>
   <link href="http://jinopapo.github.io/"/>
-  <updated>2015-12-04T00:13:38+09:00</updated>
+  <updated>2015-12-04T12:09:45+09:00</updated>
   <id>http://jinopapo.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -18,15 +18,21 @@
     <link href="http://jinopapo.github.io/blog/2015/12/03/window8-dot-1dexubuntuwodeyuarubuto/"/>
     <updated>2015-12-03T00:56:30+09:00</updated>
     <id>http://jinopapo.github.io/blog/2015/12/03/window8-dot-1dexubuntuwodeyuarubuto</id>
-    <content type="html"><![CDATA[<p>windows8.1でxubuntuをデュアルブートする時にハマった。
-自分の場合はグラボ側にメインのモニターを繋いでいて、当然xubuntuにはGPUのドライバーが入っていないので、ちょっとこっとエラーのメッセージが出てその後、何も出力されなくなるってことになった。
-最初の数時間はエラーメッセージに気が付かなくて、いろいろいじりまわしてたけどマザボ側の出力に変えるだけで解決。
-ようやくxubuntuが起動し、インストール。
-これはすんなりいった。
-その後、なんやかんやGPUのドライバーを入れwindowの起動を確認し、その日は終了。
-次の日立ち上げるとwindowしかた立ち上がらず,xubuntuはHDD上には存在しているが起動するデバイスが存在しないと言われ立ち上がらず。
-調べてみると、windpow8は、windowを起動するたびにwindowのブートローダーを最優先にするらしく一回windowsを起動してしまうと、grubの優先度が下がり見えなくなってしまいubuntuが起動できなくなる仕様らしい。
-これを解決するにはwindowsのブートローダーを書き換えてubuntuをwindowsのブートローダーから立ち上がるようにするか、windowのブートローダーをgrubで上書きするのがいいらしい。</p>
+    <content type="html"><![CDATA[<p>windows8.1でxubuntuをデュアルブートする時にハマった。</p>
+
+<p>自分の場合はグラボ側にメインのモニターを繋いでいて、当然xubuntuにはGPUのドライバーが入っていないので、ちょっとこっとエラーのメッセージが出てその後、何も出力されなくなるってことになった。</p>
+
+<p>最初の数時間はエラーメッセージに気が付かなくて、いろいろいじりまわしてたけどマザボ側の出力に変えるだけで解決。
+n
+ようやくxubuntuが起動し、インストール。これはすんなりいった。</p>
+
+<p>その後、なんやかんやGPUのドライバーを入れwindowの起動を確認し、その日は終了。</p>
+
+<p>次の日立ち上げるとwindowしかた立ち上がらず,xubuntuはHDD上には存在しているが起動するデバイスが存在しないと言われ立ち上がらず。</p>
+
+<p>調べてみると、windpow8は、windowを起動するたびにwindowのブートローダーを最優先にするらしく一回windowsを起動してしまうと、grubの優先度が下がり見えなくなってしまいubuntuが起動できなくなる仕様らしい。</p>
+
+<p>これを解決するにはwindowsのブートローダーを書き換えてubuntuをwindowsのブートローダーから立ち上がるようにするか、windowのブートローダーをgrubで上書きするのがいいらしい。</p>
 ]]></content>
   </entry>
   
