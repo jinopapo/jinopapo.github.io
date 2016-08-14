@@ -9,12 +9,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>とてもつらい</title>
+  <title>Prml1 - とてもつらい</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content=" とてもつらい
-猫とぷよぐらみんぐ about me 何がしたいかわからない、何ができるかわからない Prml1 written window8.1でxubuntuをデュアルブート written 2015/12/03 All Posts ">
+  <meta name="description" content="Prml1 written 序論 回帰の例 機械学習でできることの一つの回帰を例に雰囲気を説明する。
+wに関する線形の式\(y(x)=\sum^{M}_{j=0}w_{j}x^{j}\)でsin関数を近似する。
+この時のMはモデルの次数、wは学習によって調節されるパラメータを表す。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jinopapo.github.io">
+  <link rel="canonical" href="http://jinopapo.github.io/blog/2016/08/14/prml1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="とてもつらい" type="application/atom+xml">
@@ -41,54 +42,34 @@
       <img src="/images/home.png"/>
     </a>
 
-    <div class="home-page">
-  <div class="hero">
-    <h1>とてもつらい</h1>
-<p>猫とぷよぐらみんぐ</p>
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Prml1</h1>
+        <div class="meta">
+          written 
 
-  </div>
 
-  <div class="home-field">
-    <div class="home-landing her-row">
-      <div class="container">
-        <div class="row">
-          <div id="about-me" class="col-md-offset-3 col-md-6">
-  <h4>about me</h4>
-  <p>何がしたいかわからない、何ができるかわからない</p>
-  <div class="social-icon-list">
-    <a title="Twitter" href="https://twitter.com/jinopapo"><img src="/images/glyphicons_social_31_twitter.png"/></a>
-    
-    <a title="GitHub" href="https://github.com/jinopapo"><img src="/images/glyphicons_social_21_github.png"/></a>
-    
-    
-    
-  </div>
-</div>
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-08-14T16:56:46+09:00" pubdate data-updated="true"></time>
+          
+
 
         </div>
-      </div>
-    </div>
-
-    <div class="article-list">
-      <div class="container">
-        
-          
-          <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-              <article>
-  <h2><a href="/blog/2016/08/14/prml1/">Prml1</a></h2>
-  <!--
-  
-  <p>
-    <h1>序論<a id="orgheadline7"></a></h1>
-
-
-
+        <h1>序論<a id="orgheadline7"></a></h1>
 
 <h2>回帰の例<a id="orgheadline1"></a></h2>
-
-
-
 
 <p>機械学習でできることの一つの回帰を例に雰囲気を説明する。
 wに関する線形の式\(y(x)=\sum^{M}_{j=0}w_{j}x^{j}\)でsin関数を近似する。
@@ -103,18 +84,9 @@ wに関する線形の式\(y(x)=\sum^{M}_{j=0}w_{j}x^{j}\)でsin関数を近似�
 これによりノイズに強くなったりする。
 モデルの複雑さを決める方法としては、クロスバリデーションとかある。</p>
 
-
-
-
 <h2>確率論<a id="orgheadline5"></a></h2>
 
-
-
-
 <h3>ベイズ　<a id="orgheadline2"></a></h3>
-
-
-
 
 <p>ランダムな繰り返し試行の頻度を確率とするのを、頻度主義また古典確率という。
 ランダムな繰り返し試行の不確かさを確率とするのをベイズ主義という。
@@ -128,13 +100,7 @@ p(D)は
 \[p(D)=\int p(D|w)p(w)dw\]
 に変換でき、p(w|D)はwの式とみなせる。</p>
 
-
-
-
 <h3>正規分布<a id="orgheadline3"></a></h3>
-
-
-
 
 <p>事前分布としてよく用いられる正規分布について触れる。
 正規分布は
@@ -152,13 +118,7 @@ p(D)は
 この時、サンプル平均は、すぐ真に近づくが、サンプル分散はなかなか近づかない。
 これをバイアスという。</p>
 
-
-
-
 <h3>回帰の例<a id="orgheadline4"></a></h3>
-
-
-
 
 <p>確率から回帰の例をもう一度見る。
 入力xに対して求めたい値tの発生確率が正規分布に従うとすると
@@ -180,13 +140,7 @@ p(D)は
 \[p(t|x,X,T)=\int p(t|x,w,\beta)p(w|X,T,\alpha,\beta)dw\]
 となる　</p>
 
-
-
-
 <h2>決定論<a id="orgheadline6"></a></h2>
-
-
-
 
 <p>入力に対して出力を一意に決める問題。
 クラスタリングの例をみる。
@@ -203,117 +157,26 @@ p(D)は
 ( c )のアプローチでは、しきい値も全部決めてしまうので、何か変更があった時とか一から学習しなおしたりするので、汎用性にかける。</p>
 
 
-  </p>
-  -->
-  <span class="meta">
-    written 
+        <hr class="divider-short"/>
 
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2016-08-14T16:56:46+09:00" pubdate data-updated="true"></time>
-    
-
-
-  </span>
-
-  
-</article>
-
-            </div>
-          </div>
-        
-          
-          <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-              <article>
-  <h2><a href="/blog/2015/12/03/window8-dot-1dexubuntuwodeyuarubuto/">window8.1でxubuntuをデュアルブート</a></h2>
-  <!--
-  
-  <p>
-    <p>windows8.1でxubuntuをデュアルブートする時にハマった。</p>
-
-
-
-
-<p>自分の場合はグラボ側にメインのモニターを繋いでいて、当然xubuntuにはGPUのドライバーが入っていないので、ちょっとこっとエラーのメッセージが出てその後、何も出力されなくなるってことになった。</p>
-
-
-
-
-<p>最初の数時間はエラーメッセージに気が付かなくて、いろいろいじりまわしてたけどマザボ側の出力に変えるだけで解決。</p>
-
-
-
-
-<p>ようやくxubuntuが起動し、インストール。これはすんなりいった。</p>
-
-
-
-
-<p>その後、なんやかんやGPUのドライバーを入れwindowの起動を確認し、その日は終了。</p>
-
-
-
-
-<p>次の日立ち上げるとwindowしかた立ち上がらず,xubuntuはHDD上には存在しているが起動するデバイスが存在しないと言われ立ち上がらず。</p>
-
-
-
-
-<p>調べてみると、windpow8は、windowを起動するたびにwindowのブートローダーを最優先にするらしく一回windowsを起動してしまうと、grubの優先度が下がり見えなくなってしまいubuntuが起動できなくなる仕様らしい。</p>
-
-
-
-
-<p>これを解決するにはwindowsのブートローダーを書き換えてubuntuをwindowsのブートローダーから立ち上がるようにするか、windowのブートローダーをgrubで上書きするのがいいらしい。</p>
-
-
-  </p>
-  -->
-  <span class="meta">
-    written 
-
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2015-12-03T00:56:30+09:00" pubdate data-updated="true">2015/12/03</time>
-    
-
-
-  </span>
-
-  
-</article>
-
-            </div>
-          </div>
         
       </div>
     </div>
+  </div>
+</article>
 
-    <hr class="divider-short"/>
+<hr class="divider-short"/>
 
-    <div class="archive-link">
-      <h3><a href="/posts/">All Posts</a></h3>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2015/12/03/window8-dot-1dexubuntuwodeyuarubuto/" title="Previous Post: window8.1でxubuntuをデュアルブート">&laquo; Previous: window8.1でxubuntuをデュアルブート</a>
+        
+
+        
+      </div>
     </div>
   </div>
 </div>
