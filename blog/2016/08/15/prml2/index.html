@@ -9,11 +9,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>All Posts - とてもつらい</title>
+  <title>PRML2章 - とてもつらい</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content=" All Posts PRML2章 written Prml1 written window8.1でxubuntuをデュアルブート written 2015/12/03 ">
+  <meta name="description" content="PRML2章 written 確率分布 二値変数 ベルヌーイ分布 コイン裏表のように、結果が二値しかない場合の分布を考える。
+x=1となる確率を\(\mu\)を使って
+\[p(x=1|\mu)=\mu\]
+と表すと確率分布は、
+\[Bern(x|\mu)=\mu^{x}(1-\mu)^{1-x &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jinopapo.github.io/posts">
+  <link rel="canonical" href="http://jinopapo.github.io/blog/2016/08/15/prml2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="とてもつらい" type="application/atom+xml">
@@ -40,40 +44,36 @@
       <img src="/images/home.png"/>
     </a>
 
-    <div class="all-posts">
+    <article role="article" class="full-single-article">
   <div class="container">
     <div class="row">
-      <div class="list-title col-md-offset-3 col-md-6">
-        <h4>All Posts</h4>
-      </div>
-    </div>
-  </div>
+      <div class="col-md-8 col-md-offset-2">
+        <h1>PRML2章</h1>
+        <div class="meta">
+          written 
 
-  <div class="article-list">
-    <div class="container">
-      
-      
-      <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-          <article>
-  <h2><a href="/blog/2016/08/15/prml2/">PRML2章</a></h2>
-  <!--
+
+
+
+
+
+
+
+
   
-  <p>
-    <h1>確率分布<a id="orgheadline28"></a></h1>
 
 
 
+<time datetime="2016-08-15T16:20:44+09:00" pubdate data-updated="true"></time>
+          
+
+
+        </div>
+        <h1>確率分布<a id="orgheadline28"></a></h1>
 
 <h2>二値変数<a id="orgheadline12"></a></h2>
 
-
-
-
 <h3>ベルヌーイ分布<a id="orgheadline8"></a></h3>
-
-
-
 
 <p>コイン裏表のように、結果が二値しかない場合の分布を考える。
 x=1となる確率を\(\mu\)を使って
@@ -86,13 +86,7 @@ x=1となる確率を\(\mu\)を使って
 \[E[x]=\mu\]
 \[var[x]=\mu(1-\mu)\]</p>
 
-
-
-
 <h3>二項分布<a id="orgheadline9"></a></h3>
-
-
-
 
 <p>データがN個のときx=1となる分布を考える。
 この時の分布を二項分布という。
@@ -103,13 +97,7 @@ x=1となる確率を\(\mu\)を使って
 \[E[m]=N\mu\]
 \[var[m]=N\mu(1-\mu)\]</p>
 
-
-
-
 <h3>ベータ分布<a id="orgheadline10"></a></h3>
-
-
-
 
 <p>二値の分布の事前分布にはベータ分布が用いられることが多い。
 \(\gamma\)関数をもちいて
@@ -123,13 +111,7 @@ a、bによって分布の方が代わるので、a、bをハイパーパラメ�
 事前分布に用いられる理由は、尤度関数が、\(\mu^{x}(1-\mu)^{1-x}\)に比例していて、事前分布にベータ分布を用いると事後分布も\(\mu^{x}(1-\mu)^{1-x}\)に比例するから。
 これを性質を共役性という。</p>
 
-
-
-
 <h3>比較<a id="orgheadline11"></a></h3>
-
-
-
 
 <p>観測データDが得られたときの、頻度主義での分布モデルについて考える。
 Dが独立して得られたとすると、尤度関数は
@@ -146,18 +128,9 @@ Dが独立して得られたとすると、尤度関数は
 \[p(x=1|D)=\frac{m+a}{m+a+l+b}\]
 となる。</p>
 
-
-
-
 <h2>多値変数<a id="orgheadline15"></a></h2>
 
-
-
-
 <h3>多項分布<a id="orgheadline13"></a></h3>
-
-
-
 
 <p>多次元ベクトルで\(\sum_{k=1}^{K} x_{k}=1\)となるベクトルの分布を考える。
 この時のxの分布は、
@@ -176,25 +149,13 @@ N個のデータ集合Dが得られたとすると尤度関数は、
 を最大化すると
 \[\mu_{k}^{ML}=\frac{m_{k}}{N}\]</p>
 
-
-
-
 <h3>ディリクレ分布<a id="orgheadline14"></a></h3>
-
-
-
 
 <p>多項分布の共役分布を正規化すると、
 \[Dir(\mu|\alpha)=\frac{\gamma(\alpha_{0})}{\gamma(\alpha_{1}..\gamma(\alpha_{k}))}\prod_{k=1}^{K}\mu_{k}^{\alpha_{k}-1}\]
 となりディリクレ分布と呼ばれる。</p>
 
-
-
-
 <h2>ガウス分布<a id="orgheadline23"></a></h2>
-
-
-
 
 <p>よく使われる分布。
 一変数の場合
@@ -204,13 +165,7 @@ D次元ベクトルの場合
 となる。
 基本的には一つのピークを持つ分布なので、近似しにくいため、潜在変数や、非観測変数などを使っていろいろ近似する。</p>
 
-
-
-
 <h3>条件付きガウス分布と周辺ガウス分布<a id="orgheadline16"></a></h3>
-
-
-
 
 <p>ある二つの変数集合がガウス分布に従うなら、条件付き分布と、周辺分布も正規分布になる。
 \(\Lambda=\sigma^{-1}\)とした同時確率正規分布\(N(x|\mu,\sigma)\)があるとし、
@@ -244,13 +199,7 @@ D次元ベクトルの場合
 \[p(x|y)=N(x|\sigma{A^{T}L(y-b)+\Lambda\mu},\sigma)\]
 \[\sigma=(\Lambda+A^{T}LA)^{-1}\]</p>
 
-
-
-
 <h3>Robbins-Monroアルゴリズム<a id="orgheadline17"></a></h3>
-
-
-
 
 <p>同時確率分布\(p(z,\theta)\)があるとき、zの条件付き確率を\(f(\theta)\)として定義する。
 この関数を回帰関数という。
@@ -264,13 +213,7 @@ Robbins-Monroアルゴリズムでは、回帰関数の\(f(\theta^{*})=0\)とな
 \[\sum_{N=1}^{\infty}a_{N}^{2}&lt;\infty\]
 を満たす整数の系列でなければならない。</p>
 
-
-
-
 <h3>ガンマ分布<a id="orgheadline18"></a></h3>
-
-
-
 
 <p>\[Gam(\lambda|a,b)=\frac{1}{\Gamma(a)}b^{a}\lambda^{a-1}exp(-b\lambda)\]
 で定義される分布。
@@ -278,33 +221,18 @@ Robbins-Monroアルゴリズムでは、回帰関数の\(f(\theta^{*})=0\)とな
 \[E[\lambda]=\frac{a}{b}\]
 \[var[\lambda]=\frac{a}{b^{2}}\]</p>
 
-
-
-
 <h3>スチューデントのt分布<a id="orgheadline19"></a></h3>
-
-
-
 
 <p>\begin{equation}
 St(x\mid \mu,\lambda,\nu)=\frac{\Gamma(\frac{\nu}{2}+\frac{1}{2})}{\Gamma(\frac{\nu}{2})}(\frac{\lambda}{\pi\nu})^{\frac{1}{2}}[1+\frac{\lambda(x-\mu)^{2}}{\nu}]^{-\frac{\nu}{2}-\frac{1}{2}}
 \end{equation}</p>
-
-
-
 
 <p>で表される分布をt分布という。
 \(\lambda\)は精度を表すが分散の逆数ではない。\(\nu\)は自由度。
 一般的に正規分布よりもすそが広くロバスト性があるため、ノイズにつよい。
 また最尤推定解は、EMアルゴリズムで求める。</p>
 
-
-
-
 <h3>フォン・ミーゼス分布<a id="orgheadline20"></a></h3>
-
-
-
 
 <p>ガウス分布で、周期的な変数を扱いたい時に使える分布。例えば、風向きの予測など。
 二変数の正規分布は、
@@ -325,13 +253,7 @@ mに関しては、
 \[A(m_{ML})=\frac{1}{N}\sum_{n=1}{N}\cos(\theta_{n}-\theta_{0}^{ML})\]
 となる。</p>
 
-
-
-
 <h3>頻度主義とベイズ主義の比較<a id="orgheadline21"></a></h3>
-
-
-
 
 <p>最尤推定によって逐次学習を行う場合を考える。
 正規分布から、データ点が得られたとすると対数尤度は
@@ -359,49 +281,28 @@ mに関しては、
 となり、事前分布には共役事前分布のガウス分布\(p(&mu;)=N(&mu;\mid &mu;_{0},&sigma;_{0}^{2})\)を選べばいいと解る。
 この時、事後分布は、</p>
 
-
-
-
 <p>\begin{equation}
 p(\mu\mid X)=N(\mu\mid \mu_{N},\sigma_{N}^{2})
 \end{equation}</p>
-
-
-
 
 <p>\begin{equation}
 \mu_{N}=\frac{\sigma^{2}}{N\sigma_{0}^{2}+\sigma^{2}}\mu_{0}+\frac{N\sigma_{0}^{2}}{N\sigma_{0}^{2}+\sigma^{2}}\mu_{ML}
 \end{equation}</p>
 
-
-
-
 <p>\begin{equation}
 \frac{1}{\sigma_{N}^{2}}=\frac{1}{\sigma_{0}^{2}}+\frac{N}{\sigma^{2}}
 \end{equation}</p>
-
-
-
 
 <p>となる。
 逐次学習については、尤度関数を事後分布に掛けあわせていくだけでよい・
 分散が未知の場合の尤度関数は、精度\(\lambda\)を用いて</p>
 
-
-
-
 <p>\begin{equation}
 p(X|\lambda)\propto\lambda^{\frac{N}{2}}\exp\{-\frac{\lambda}{2}\sum^{N}_{n=1}(x_{n}-\mu)^{2}\}
 \end{equation}</p>
 
-
-
-
 <p>となり事前分布は、ガンマ分布\(Gam(&lambda;\mid a_{0},b_{0})\)を用いればいいとわかる。
 事後分布は、</p>
-
-
-
 
 <p>\begin{eqnarray}
 p(\lambda\mid X)\propto Gam(\lambda\mid a_{N},b_{N}) \\
@@ -409,34 +310,19 @@ a_{N}=a_{0}+\frac{N}{2} \\
 b_{N}=b_{0}+\frac{N}{2}\sigma^{2}_{ML}
 \end{eqnarray}</p>
 
-
-
-
 <p>となる。
 平均と分散が未知の場合は、同時確率分布は</p>
-
-
-
 
 <p>\begin{equation}
 p(\mu,\lambda)\propto\exp\{-\frac{\beta\lambda}{2}(\mu-\frac{c}{\beta})^{2}\}\lambda^{\frac{\beta}{2}}\exp\{-(d-\frac{c^{2}}{2\beta})\lambda\}
 \end{equation}</p>
 
-
-
-
 <p>となる。c、d、\(\beta\)は定数である。
 事前分布は、\(a=\frac{(1+\beta)}{2}、b=d-\frac{c^{2}}{2\beta}\)とすると</p>
-
-
-
 
 <p>\begin{equation}
 p(\mu,\lambda)=N(\mu\mid \mu_{0},(\beta\lambda)^{-1})Gam(\lambda\mid a.b)
 \end{equation}</p>
-
-
-
 
 <p>となる。
 この分布は正規-ガンマ分布という。
@@ -444,40 +330,22 @@ D次元変数の場合についてかんがえる。
 平均が未知の時は、事前分布はガウス分布になる。
 分散が未知の場合は、事前分布は</p>
 
-
-
-
 <p>\begin{eqnarray}
 W(\Lambda\mid W,\nu)=B|\Lambda|^{\frac{(\nu-D-1)}{2}}\exp((-\frac{1}{2}\mathrm{Tr}(W^{-1}\Lambda))) \
 B(W,\nu)=|W|^{\frac{\nu}{2}}(2^{\nu\frac{D}{2}}\pi^{D\frac{(D-1)}{4}}\prod_{i=1}^{D}\Gamma(\frac{\nu+1-i}{2}))^{-1}
 \end{eqnarray}</p>
 
-
-
-
 <p>となる。
 これはウィシャート分布と言われ、\nuは、自由度パラメータ、Wは尺度行列、Bは正則化定数
 分布と平均が未知の場合は、</p>
-
-
-
 
 <p>\begin{equation}
 p(\mu,\Lambda\mid \mu_{0},\beta,W,\nu)=N(\mu\mid \mu_{0},(\beta\Lambda)^{-1})W(\lambda\mid W,\nu)
 \end{equation}</p>
 
-
-
-
 <p>となり、ガウス-ウィシャート分布といわれる。</p>
 
-
-
-
 <h3>混合ガウス分布<a id="orgheadline22"></a></h3>
-
-
-
 
 <p>複雑なデータに関して一つのガウス分布だけでは、うまく近似できないことがある
 複数個のガウス分布を重ねて混合ガウス分布にするとうまく近似できる
@@ -495,13 +363,7 @@ p(\mu,\Lambda\mid \mu_{0},\beta,W,\nu)=N(\mu\mid \mu_{0},(\beta\Lambda)^{-1})W(\
 \[\ln p(X\mid \pi,\mu,\sigma)=\sum_{n=1}^{N}\ln{\sum_{k=1}^{K}\pi_{k}N(x_{n}\mid \mu_{k},\sigma_{k})}\]
 となる。これを解くためには、EMアルゴリズムなどを使う。</p>
 
-
-
-
 <h2>指数型分布族<a id="orgheadline24"></a></h2>
-
-
-
 
 <p>\[p(x\mid \eta)=h(x)g(\eta)\exp\{\eta^{T}u(x)\}\]
 で表されるのを指数型分布属という。
@@ -517,13 +379,7 @@ p(\mu,\Lambda\mid \mu_{0},\beta,W,\nu)=N(\mu\mid \mu_{0},(\beta\Lambda)^{-1})W(\
 で表され、\(\sigma\)は尺度パラメータという。この時、分布は、正規化できないので、変速事前分布と言われる。
 変速事前分布をとった場合でも、事後分布が正規化できる場合は使われる</p>
 
-
-
-
 <h2>ノンパラメトリック法<a id="orgheadline27"></a></h2>
-
-
-
 
 <p>事前分布などを用いたパラメータを用いる方法ではなく、データ点から分布モデルをつくることについて考える。
 D次元の分布p(x)からなるデータ点をもとに、p(x)を推定する。
@@ -531,13 +387,7 @@ D次元の分布p(x)からなるデータ点をもとに、p(x)を推定する�
 \[p(x)=\frac{K}{NV}\]
 で近似できる。Kは領域に含まれるデータ点の数、Nはデータ点の総数、Vは領域の体積。</p>
 
-
-
-
 <h3>カーネル密度推定<a id="orgheadline25"></a></h3>
-
-
-
 
 <p>Vを固定し、領域内に含まれうKによってp(x)を推定する。
 \[k(u)\geq0\]
@@ -548,282 +398,32 @@ Kは、
 により推定される。
 このhがカーネル関数によって変換された空間の広さに値し、hを適切に選ぶとうまく近似できる。一般にカーネル関数には、ガウス関数が用いられる。</p>
 
-
-
-
 <h3>最近傍法<a id="orgheadline26"></a></h3>
-
-
-
 
 <p>Kを固定し、K個データ点が入るように、Vを決めp(x)を推定する。
 いわゆるk近傍法。クラスタリングとかに使われる。</p>
 
 
-  </p>
-  -->
-  <span class="meta">
-    written 
+        <hr class="divider-short"/>
 
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2016-08-15T16:20:44+09:00" pubdate data-updated="true"></time>
-    
-
-
-  </span>
-
-  
+        
+      </div>
+    </div>
+  </div>
 </article>
 
-        </div>
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2016/08/14/prml1/" title="Previous Post: prml1">&laquo; Previous: prml1</a>
+        
+
+        
       </div>
-      
-      
-      <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-          <article>
-  <h2><a href="/blog/2016/08/14/prml1/">Prml1</a></h2>
-  <!--
-  
-  <p>
-    <h1>序論<a id="orgheadline7"></a></h1>
-
-
-
-
-<h2>回帰の例<a id="orgheadline1"></a></h2>
-
-
-
-
-<p>機械学習でできることの一つの回帰を例に雰囲気を説明する。
-wに関する線形の式\(y(x)=\sum^{M}_{j=0}w_{j}x^{j}\)でsin関数を近似する。
-この時のMはモデルの次数、wは学習によって調節されるパラメータを表す。
-学習用データには、実際の問題と同じようにノイズを乗せたsin関数の値を用いる。
-誤差関数には二法誤差を使う。
-学習によってこの誤差関数を最小にする用にパラメータを調節していく。
-この時モデルの次数はとても大切で、適切な次数でないと、表現力が足りなかったり、過学習してしまう。
-ベイズの用に確率を使うと、モデルの複雑さには依存しなくなる。
-この過学習を防ぐ方法としては、正則化がよく用いられる。
-正則化とは、誤差関数にペナルティを課して、パラメータが大きくなり過ぎない用にすること。
-これによりノイズに強くなったりする。
-モデルの複雑さを決める方法としては、クロスバリデーションとかある。</p>
-
-
-
-
-<h2>確率論<a id="orgheadline5"></a></h2>
-
-
-
-
-<h3>ベイズ　<a id="orgheadline2"></a></h3>
-
-
-
-
-<p>ランダムな繰り返し試行の頻度を確率とするのを、頻度主義また古典確率という。
-ランダムな繰り返し試行の不確かさを確率とするのをベイズ主義という。
-ベイズでは、自分たちパラメータw対するの知見を、事前確率p(w)という形で確率に組み込み、観測されたデータDはp(D|w)という形で表される。
-頻度主義では、データを元に、パラメータを更新していくのに対し、ベイズでは、wの不確かさが更新されて行く。
-これらを元にベイズの定理を適用すると、
-\[p(w|D)=\frac{p(D|w)p(w)}{p(D)}\]
-となり、wのそれっぽさが確率で出せる。
-また、p(D|w)は、wに関する関数ともとれ、尤度関数という。
-p(D)は
-\[p(D)=\int p(D|w)p(w)dw\]
-に変換でき、p(w|D)はwの式とみなせる。</p>
-
-
-
-
-<h3>正規分布<a id="orgheadline3"></a></h3>
-
-
-
-
-<p>事前分布としてよく用いられる正規分布について触れる。
-正規分布は
-\[N(x|\mu,\sigma)=\frac{1}{(2\pi\sigma^{2})^{\frac{1}{2}}}exp{-\frac{1}{2\sigma^{2}(x-\mu)^{2}}}\]
-で表される。
-\(\mu\)を平均\(\sigma^{2}\)を分散とする。
-データ集合Xが与えられたときのパラメータの決め方について考える。
-\(\mu\)と\(\sigma\)が与えられたときのデータ集合の発生確率は、
-\[p(X|\mu,\sigma^{2})=\prod^{N}_{n=1}N(X_{n}|\mu,\sigma^{2})\]
-となり、これが尤度関数になる。
-対数尤度を取り、最小化する\(\mu_{ML}\)、\(\sigma^{2}_{ML}\)を求めると
-\[\mu_{ML}=\frac{1}{N}\sum^{N}{n=1}x_{n}\]
-\[\sigma^{2}_{ML}=\frac{1}{N}\sum^{N}{n=1}(x_{n}-\mu_{ML})^{2}\]
-となり、それぞれサンプル平均、サンプル分散と言われる。
-この時、サンプル平均は、すぐ真に近づくが、サンプル分散はなかなか近づかない。
-これをバイアスという。</p>
-
-
-
-
-<h3>回帰の例<a id="orgheadline4"></a></h3>
-
-
-
-
-<p>確率から回帰の例をもう一度見る。
-入力xに対して求めたい値tの発生確率が正規分布に従うとすると
-\[p(t|x,w,\beta)=N(t|y(x,w),\beta^{-1})\]
-となる。
-訓練データ{X,T}を用いると
-\[p(T|X,w,\beta)=\prod_{n=1}^{N}N(T_{n}|y(X_{n},w),\beta^{-1})\]
-で尤度関数が定義でき、最尤推定によりモデルのパラメータを決めることができる。
-これは、二乗誤差でパラメータを最適化すると同じ。
-ベイズ的な視点から回帰の例をみる。
-事前確率を
-\[p(w|\alpha)=N(w|0,\alpha^{-1}I)\]
-とするとwの事後確率は、
-\[p(w|X,T,\alpha,\beta)\propto p(T|X,w,\beta)p(w|\alpha)\]
-となる。
-与えられたデータから、事後確率を最大にするwを求めるのをMAP推定という。
-これは、正則化を用いて二乗誤差でwを最適化するのと同じ。
-完全なベイズでは、予測分布を作るので
-\[p(t|x,X,T)=\int p(t|x,w,\beta)p(w|X,T,\alpha,\beta)dw\]
-となる　</p>
-
-
-
-
-<h2>決定論<a id="orgheadline6"></a></h2>
-
-
-
-
-<p>入力に対して出力を一意に決める問題。
-クラスタリングの例をみる。
-入力xをクラスC<sub>k</sub>に当てはめる。
-アプローチとしては、<br/>
-( a )p(x|C<sub>k</sub>)を求めてベイズの定理を使いp(C_{}k}|x)を求める。これは、同時確率分布を求められ、出力も入力も人工的に生成できるので生成モデルと言われる<br/>
-( b )p(C<sub>k</sub>)を直接求める。識別モデルと言われる<br/>
-( c )クラスC<sub>k</sub>を出力する関数を求める<br/>
-の三種類がある。
-( a )( b )のアプローチでは、クラスを決定するしきい値を求める問題がある。
-最も簡単な誤識別を最小にする考え方では、単純にもっとも確率の高い物を選べばいい。
-複雑な物を例として、誤認識したときの損失を最小にする考え方では、認識ごとに重みをつけそれを最小化するものを選ぶ。
-別の方法としては、分からないものとして棄却する方法もある。あるしきい値をきめて、各クラスになる確率がしきい値以下なら分からないものとする。
-( c )のアプローチでは、しきい値も全部決めてしまうので、何か変更があった時とか一から学習しなおしたりするので、汎用性にかける。</p>
-
-
-  </p>
-  -->
-  <span class="meta">
-    written 
-
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2016-08-14T16:56:46+09:00" pubdate data-updated="true"></time>
-    
-
-
-  </span>
-
-  
-</article>
-
-        </div>
-      </div>
-      
-      
-      <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-          <article>
-  <h2><a href="/blog/2015/12/03/window8-dot-1dexubuntuwodeyuarubuto/">window8.1でxubuntuをデュアルブート</a></h2>
-  <!--
-  
-  <p>
-    <p>windows8.1でxubuntuをデュアルブートする時にハマった。</p>
-
-
-
-
-<p>自分の場合はグラボ側にメインのモニターを繋いでいて、当然xubuntuにはGPUのドライバーが入っていないので、ちょっとこっとエラーのメッセージが出てその後、何も出力されなくなるってことになった。</p>
-
-
-
-
-<p>最初の数時間はエラーメッセージに気が付かなくて、いろいろいじりまわしてたけどマザボ側の出力に変えるだけで解決。</p>
-
-
-
-
-<p>ようやくxubuntuが起動し、インストール。これはすんなりいった。</p>
-
-
-
-
-<p>その後、なんやかんやGPUのドライバーを入れwindowの起動を確認し、その日は終了。</p>
-
-
-
-
-<p>次の日立ち上げるとwindowしかた立ち上がらず,xubuntuはHDD上には存在しているが起動するデバイスが存在しないと言われ立ち上がらず。</p>
-
-
-
-
-<p>調べてみると、windpow8は、windowを起動するたびにwindowのブートローダーを最優先にするらしく一回windowsを起動してしまうと、grubの優先度が下がり見えなくなってしまいubuntuが起動できなくなる仕様らしい。</p>
-
-
-
-
-<p>これを解決するにはwindowsのブートローダーを書き換えてubuntuをwindowsのブートローダーから立ち上がるようにするか、windowのブートローダーをgrubで上書きするのがいいらしい。</p>
-
-
-  </p>
-  -->
-  <span class="meta">
-    written 
-
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2015-12-03T00:56:30+09:00" pubdate data-updated="true">2015/12/03</time>
-    
-
-
-  </span>
-
-  
-</article>
-
-        </div>
-      </div>
-      
     </div>
   </div>
 </div>

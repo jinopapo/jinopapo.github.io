@@ -14,7 +14,7 @@
 
   
   <meta name="description" content=" とてもつらい
-猫とぷよぐらみんぐ about me 何がしたいかわからない、何ができるかわからない Prml1 written window8.1でxubuntuをデュアルブート written 2015/12/03 All Posts ">
+猫とぷよぐらみんぐ about me 何がしたいかわからない、何ができるかわからない PRML2章 written Prml1 written window8.1でxubuntuをデュアルブート written 2015/12/03 All Posts ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,543 @@
 
     <div class="article-list">
       <div class="container">
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/blog/2016/08/15/prml2/">PRML2章</a></h2>
+  <!--
+  
+  <p>
+    <h1>確率分布<a id="orgheadline28"></a></h1>
+
+
+
+
+<h2>二値変数<a id="orgheadline12"></a></h2>
+
+
+
+
+<h3>ベルヌーイ分布<a id="orgheadline8"></a></h3>
+
+
+
+
+<p>コイン裏表のように、結果が二値しかない場合の分布を考える。
+x=1となる確率を\(\mu\)を使って
+\[p(x=1|\mu)=\mu\]
+と表すと確率分布は、
+\[Bern(x|\mu)=\mu^{x}(1-\mu)^{1-x}\]
+で表される。
+これをベルヌーイ分布という。
+平均と分散は、
+\[E[x]=\mu\]
+\[var[x]=\mu(1-\mu)\]</p>
+
+
+
+
+<h3>二項分布<a id="orgheadline9"></a></h3>
+
+
+
+
+<p>データがN個のときx=1となる分布を考える。
+この時の分布を二項分布という。
+二項分布は、全体をNx=1がになった回数をmとすると、
+\[Bin(m|N,\mu)=\frac{N!}{(N-m)!m!}\mu^{m}(1-\mu)^{N-m}\]
+となる。
+平均と分散は
+\[E[m]=N\mu\]
+\[var[m]=N\mu(1-\mu)\]</p>
+
+
+
+
+<h3>ベータ分布<a id="orgheadline10"></a></h3>
+
+
+
+
+<p>二値の分布の事前分布にはベータ分布が用いられることが多い。
+\(\gamma\)関数をもちいて
+\[Beta(\mu|a,b)=\frac{\gamma(a+b)}{\gamma(a)\gamma(b)}\mu^{a-1}(1-\mu)^{b-1}\]
+で表される。
+平均と分散は、
+\[E[\mu]=\frac{a}{a+b}\]
+\[var[\mu]=\frac{ab}{(a+b)^{2}(a+b+1)}\]
+となる。
+a、bによって分布の方が代わるので、a、bをハイパーパラメータという。
+事前分布に用いられる理由は、尤度関数が、\(\mu^{x}(1-\mu)^{1-x}\)に比例していて、事前分布にベータ分布を用いると事後分布も\(\mu^{x}(1-\mu)^{1-x}\)に比例するから。
+これを性質を共役性という。</p>
+
+
+
+
+<h3>比較<a id="orgheadline11"></a></h3>
+
+
+
+
+<p>観測データDが得られたときの、頻度主義での分布モデルについて考える。
+Dが独立して得られたとすると、尤度関数は
+\[p(D|\mu)=\prod_{n=1}^{N}p(x_{n}|\mu)=\prod_{n=1}^{N}\mu^{x_{n}}(1-\mu)^{1-x_{n}}\]
+で表わせる。これを対数を取り最尤推定すると、
+\[\mu_{ML}=\frac{1}{N}\sum_{n=1}^{N}x_{n}\]
+となる。
+ベイズ主義からの分布モデルについて考える。
+事後分布は、
+\[p(\mu|m,l,a,b)=\frac{\gamma(m+a+l+b)}{\gamma(m+a)\gamma(l+b)}\mu^{m+a-1}(1-\mu)^{l+b-1}\]
+となる。
+また、この式から事後分布は事前分布からa、bをm、lだけ増やした形になっていて、データが増えた時に同じように分布が更新できることがわかる。
+逐次学習中のある時間での分布は、
+\[p(x=1|D)=\frac{m+a}{m+a+l+b}\]
+となる。</p>
+
+
+
+
+<h2>多値変数<a id="orgheadline15"></a></h2>
+
+
+
+
+<h3>多項分布<a id="orgheadline13"></a></h3>
+
+
+
+
+<p>多次元ベクトルで\(\sum_{k=1}^{K} x_{k}=1\)となるベクトルの分布を考える。
+この時のxの分布は、
+\[p(x|\mu)=\prod_{k=1}^{K}\mu_{k}^{x_{k}}\]
+となり、ベルヌーイ分布を2種類以上の出力に一般化した物になる。
+N個のデータ集合Dが得られたとすると尤度関数は、
+\[p(D|\mu)=\prod_{n=1}^{N}\prod_{k=1}^{K}\mu_{k}^{x_{nk}}=\prod_{k=1}^{K}\mu_{k}^{\sum_{n}x_{nk}}=\prod_{k=1}^{K}\mu_{k}^{m_{k}}\]
+となる。
+よって、\(m_{k}=\sum_{n}x_{nk}\)に依存していることがわかる。
+したがって、m<sub>k</sub>の同時確率分布について考えると
+\[Mult(m_{1}&hellip;m_{k}|\mu,N=\frac{N!}{m_{1}!&hellip;m_{k}!})\prod_{k=1}^{K}mu_{k}^{m_{k}}\]
+となる。
+これは多項分布と呼ばれる。
+これの最尤推定はラグランジュ乗数(\lambda)を用いて
+\[\sum_{k=1}^{K}m_{k}ln\mu_{k}+\lambda(\sum_{k=1}^{K}\mu_{k}-1)\]
+を最大化すると
+\[\mu_{k}^{ML}=\frac{m_{k}}{N}\]</p>
+
+
+
+
+<h3>ディリクレ分布<a id="orgheadline14"></a></h3>
+
+
+
+
+<p>多項分布の共役分布を正規化すると、
+\[Dir(\mu|\alpha)=\frac{\gamma(\alpha_{0})}{\gamma(\alpha_{1}..\gamma(\alpha_{k}))}\prod_{k=1}^{K}\mu_{k}^{\alpha_{k}-1}\]
+となりディリクレ分布と呼ばれる。</p>
+
+
+
+
+<h2>ガウス分布<a id="orgheadline23"></a></h2>
+
+
+
+
+<p>よく使われる分布。
+一変数の場合
+\[N(x|\mu,\sigma^{2})\frac{1}{(2\pi\sigma^{2})^\frac{1}{2}}exp{-\frac{1}{2\sigma^{2}}(x-\mu)^{2}}\]
+D次元ベクトルの場合
+\[N(x|\mu,\sigma^{2})\frac{1}{(2\pi)^\frac{D}{2}}exp{-\frac{1}{2}(x-\mu)^{T}\sigma^{-1}(x-\mu)}\]
+となる。
+基本的には一つのピークを持つ分布なので、近似しにくいため、潜在変数や、非観測変数などを使っていろいろ近似する。</p>
+
+
+
+
+<h3>条件付きガウス分布と周辺ガウス分布<a id="orgheadline16"></a></h3>
+
+
+
+
+<p>ある二つの変数集合がガウス分布に従うなら、条件付き分布と、周辺分布も正規分布になる。
+\(\Lambda=\sigma^{-1}\)とした同時確率正規分布\(N(x|\mu,\sigma)\)があるとし、
+\[x=(x_{a},x_{b}) \]
+\[\mu=(\mu_{a},\mu_{b})\]
+\[\sigma=\left(
+\begin{array}{cc}
+\sigma_{aa} &amp; \sigma_{ab} \\
+\sigma_{ba} &amp; \sigma_{bb}
+\end{array}
+\right)\]
+\[\Lambda=\left(
+\begin{array}{cc}
+\Lambda_{aa} &amp; \Lambda_{ab} \\
+\Lambda_{ba} &amp; \Lambda_{bb}
+\end{array}
+\right)\]
+で分割する。
+条件付きガウス分布は、
+\[p(x_{a}|x_{b})=N(x_{a}|\mu_{a|b},\Lambda_{aa}^{-1})\]
+\[\mu_{a|b}=\mu_{a}-\Lambda_{aa}^{-1}\Lambda_{ab}(x_{b}-\mu_{b})\]
+この時の平均はx<sub>b</sub>に関する線形の式とみれるので、線形ガウス分布と言われる。
+周辺ガウス分布は、
+\[p(x_{a})=N(x_{a}|\mu_{a},\sigma_{aa})\]
+で表される。
+また周辺分布と条件付き分布が
+\[p(x)=N(x|\mu,\Lambda^{-1})\]
+\[p(y|x)=N(y|Ax+b,L^{-1})\]
+で与えられたとき、ベイズの定理を用いるとyの周辺分布、条件付き分布は、
+\[p(y)=N(y|A\mu+b,J^{-1}+A\Lambda^{-1}A^{T})\]
+\[p(x|y)=N(x|\sigma{A^{T}L(y-b)+\Lambda\mu},\sigma)\]
+\[\sigma=(\Lambda+A^{T}LA)^{-1}\]</p>
+
+
+
+
+<h3>Robbins-Monroアルゴリズム<a id="orgheadline17"></a></h3>
+
+
+
+
+<p>同時確率分布\(p(z,\theta)\)があるとき、zの条件付き確率を\(f(\theta)\)として定義する。
+この関数を回帰関数という。
+Robbins-Monroアルゴリズムでは、回帰関数の\(f(\theta^{*})=0\)となる点を探すことが目的となる。
+\(\theta\)の逐次的な推定は、
+\[\theta^{(N)}=\theta^{(N-1)}-a_{N-1}z(\theta^{(N-1)})\]
+となる。
+この時\(a_{n}\)は、
+\[\lim_{Z \to \infty}a_{N}=0\]
+\[\sum_{N=1}^{\infty}a_{N}=\infty\]
+\[\sum_{N=1}^{\infty}a_{N}^{2}&lt;\infty\]
+を満たす整数の系列でなければならない。</p>
+
+
+
+
+<h3>ガンマ分布<a id="orgheadline18"></a></h3>
+
+
+
+
+<p>\[Gam(\lambda|a,b)=\frac{1}{\Gamma(a)}b^{a}\lambda^{a-1}exp(-b\lambda)\]
+で定義される分布。
+平均と分散は、
+\[E[\lambda]=\frac{a}{b}\]
+\[var[\lambda]=\frac{a}{b^{2}}\]</p>
+
+
+
+
+<h3>スチューデントのt分布<a id="orgheadline19"></a></h3>
+
+
+
+
+<p>\begin{equation}
+St(x\mid \mu,\lambda,\nu)=\frac{\Gamma(\frac{\nu}{2}+\frac{1}{2})}{\Gamma(\frac{\nu}{2})}(\frac{\lambda}{\pi\nu})^{\frac{1}{2}}[1+\frac{\lambda(x-\mu)^{2}}{\nu}]^{-\frac{\nu}{2}-\frac{1}{2}}
+\end{equation}</p>
+
+
+
+
+<p>で表される分布をt分布という。
+\(\lambda\)は精度を表すが分散の逆数ではない。\(\nu\)は自由度。
+一般的に正規分布よりもすそが広くロバスト性があるため、ノイズにつよい。
+また最尤推定解は、EMアルゴリズムで求める。</p>
+
+
+
+
+<h3>フォン・ミーゼス分布<a id="orgheadline20"></a></h3>
+
+
+
+
+<p>ガウス分布で、周期的な変数を扱いたい時に使える分布。例えば、風向きの予測など。
+二変数の正規分布は、
+\[p(x_{1},x_{2})=\frac{1}{2\pi\sigma^{2}}\exp\{-\frac{(x_{1}-\mu_{1})^{2}+(x_{2}-\mu_{2}^{2})}{2\sigma^{2}}\}\]
+で表せる。
+極座標系で表現しなおし正規化すると、
+\[p(\theta\mid\theta_{0},m)=\frac{1}{2\pi I_{0}(m)}\exp\{m\cos(\theta-\theta_{0})\}\]
+\[I_{0}(m)=\frac{1}{2\pi}\int_{0}^{2\pi}\exp\{m\cos\theta d\theta\}\]
+\[m=\frac{r_{0}}{\sigma^{2}}\]
+r<sub>0</sub>、&theta;<sub>0</sub>は平均に変数の極座標系でのパラメータ、&theta;<sub>0</sub>は平均、mは集中パラメータで、精度パラメータと同じ、\(I_{0}(m)\)は正規化係数。
+最尤推定解について考える。
+対数尤度関数は、
+\[\ln p(D\mid\theta_{0},m)=-N\ln(2\pi)-N\ln(I_{0}(m))+m\sum_{n=1}^{N}\cos(\theta_{n}-\theta_{0})\]
+となり導関数を0として解くと、
+\[\theta_{0}^{ML}=\tan^{-1}{\frac{\sum_{n}\sin\theta_{n}}{\sum_{n}\cos\theta_{n}}}\]
+となる。
+mに関しては、
+\[A(m_{ML})=\frac{1}{N}\sum_{n=1}{N}\cos(\theta_{n}-\theta_{0}^{ML})\]
+となる。</p>
+
+
+
+
+<h3>頻度主義とベイズ主義の比較<a id="orgheadline21"></a></h3>
+
+
+
+
+<p>最尤推定によって逐次学習を行う場合を考える。
+正規分布から、データ点が得られたとすると対数尤度は
+\[ln{p(X\mid &mu;,&sigma;)}=-\frac{ND}{2}ln{2\pi}-\frac{N}{2}ln|&sigma;|-\frac{1}{2}&sum;_{n=1}^{N}(x_{n}-&mu;)^{\mathrm{T}}&sigma;^{-1}(x_{n}-&mu;)\]
+となる。
+\(\mu\)について微分した導関数を0とおくと
+\[&mu;_{ML}=\frac{1}{N}&sum;_{n=1}^{N}x_{n}\]
+となる。
+\(\sigma\)については複雑だが、計算すると
+\[&sigma;=\frac{1}{N}&sum;_{n=1}^{N}(x_{n}-&mu;_{ML})(x_{n}-&mu;_{ML})^{\mathrm{T}}\]
+になる。
+この時の\(\sigma\)にはバイアスがかかっていて過小評価されているが、
+\[&sigma;=\frac{1}{N-1}&sum;_{n=1}^{N}(x_{n}-&mu;_{ML})(x_{n}-&mu;_{ML})^{\mathrm{T}}\]
+にすると真に近づく。
+逐次学習についてかんがえるため、\(x_{n}が&mu;_{ML}\)に与える影響について考えると、
+\[&mu;_{ML}^{(N)}=&mu;_{ML}^{(N-1)}+\frac{1}{N}(x_{N}-&mu;_{ML}^{(N-1)})\]
+となり、逐次学習の定式化ができた。
+しかし、いつもこれでできるわけではないので、Robbins-Monroアルゴリズムを適用する。
+この時、根は最尤推定の解に相当し、zは観測データになる。
+\(a_{N}=\frac{&sigma;^{2}}{N}\)とすると、ガウスの最尤推定の式と一致する。
+ベイズ主義によって逐次学習を行う場合を考える。
+未知の情報が何かによって事前分布の選び方が変わってくる。
+平均が未知の場合の尤度は、\(\mu\)の関数となり
+\[p(X\mid &mu;)=\frac{1}{(2\pi&sigma;^{2})^{\frac{N}{2}}}exp{-\frac{1}{2&sigma;^{2}}&sum;_{n=1}^{N}(x_{n}-&mu;)^{2}}\]
+となり、事前分布には共役事前分布のガウス分布\(p(&mu;)=N(&mu;\mid &mu;_{0},&sigma;_{0}^{2})\)を選べばいいと解る。
+この時、事後分布は、</p>
+
+
+
+
+<p>\begin{equation}
+p(\mu\mid X)=N(\mu\mid \mu_{N},\sigma_{N}^{2})
+\end{equation}</p>
+
+
+
+
+<p>\begin{equation}
+\mu_{N}=\frac{\sigma^{2}}{N\sigma_{0}^{2}+\sigma^{2}}\mu_{0}+\frac{N\sigma_{0}^{2}}{N\sigma_{0}^{2}+\sigma^{2}}\mu_{ML}
+\end{equation}</p>
+
+
+
+
+<p>\begin{equation}
+\frac{1}{\sigma_{N}^{2}}=\frac{1}{\sigma_{0}^{2}}+\frac{N}{\sigma^{2}}
+\end{equation}</p>
+
+
+
+
+<p>となる。
+逐次学習については、尤度関数を事後分布に掛けあわせていくだけでよい・
+分散が未知の場合の尤度関数は、精度\(\lambda\)を用いて</p>
+
+
+
+
+<p>\begin{equation}
+p(X|\lambda)\propto\lambda^{\frac{N}{2}}\exp\{-\frac{\lambda}{2}\sum^{N}_{n=1}(x_{n}-\mu)^{2}\}
+\end{equation}</p>
+
+
+
+
+<p>となり事前分布は、ガンマ分布\(Gam(&lambda;\mid a_{0},b_{0})\)を用いればいいとわかる。
+事後分布は、</p>
+
+
+
+
+<p>\begin{eqnarray}
+p(\lambda\mid X)\propto Gam(\lambda\mid a_{N},b_{N}) \\
+a_{N}=a_{0}+\frac{N}{2} \\
+b_{N}=b_{0}+\frac{N}{2}\sigma^{2}_{ML}
+\end{eqnarray}</p>
+
+
+
+
+<p>となる。
+平均と分散が未知の場合は、同時確率分布は</p>
+
+
+
+
+<p>\begin{equation}
+p(\mu,\lambda)\propto\exp\{-\frac{\beta\lambda}{2}(\mu-\frac{c}{\beta})^{2}\}\lambda^{\frac{\beta}{2}}\exp\{-(d-\frac{c^{2}}{2\beta})\lambda\}
+\end{equation}</p>
+
+
+
+
+<p>となる。c、d、\(\beta\)は定数である。
+事前分布は、\(a=\frac{(1+\beta)}{2}、b=d-\frac{c^{2}}{2\beta}\)とすると</p>
+
+
+
+
+<p>\begin{equation}
+p(\mu,\lambda)=N(\mu\mid \mu_{0},(\beta\lambda)^{-1})Gam(\lambda\mid a.b)
+\end{equation}</p>
+
+
+
+
+<p>となる。
+この分布は正規-ガンマ分布という。
+D次元変数の場合についてかんがえる。
+平均が未知の時は、事前分布はガウス分布になる。
+分散が未知の場合は、事前分布は</p>
+
+
+
+
+<p>\begin{eqnarray}
+W(\Lambda\mid W,\nu)=B|\Lambda|^{\frac{(\nu-D-1)}{2}}\exp((-\frac{1}{2}\mathrm{Tr}(W^{-1}\Lambda))) \
+B(W,\nu)=|W|^{\frac{\nu}{2}}(2^{\nu\frac{D}{2}}\pi^{D\frac{(D-1)}{4}}\prod_{i=1}^{D}\Gamma(\frac{\nu+1-i}{2}))^{-1}
+\end{eqnarray}</p>
+
+
+
+
+<p>となる。
+これはウィシャート分布と言われ、\nuは、自由度パラメータ、Wは尺度行列、Bは正則化定数
+分布と平均が未知の場合は、</p>
+
+
+
+
+<p>\begin{equation}
+p(\mu,\Lambda\mid \mu_{0},\beta,W,\nu)=N(\mu\mid \mu_{0},(\beta\Lambda)^{-1})W(\lambda\mid W,\nu)
+\end{equation}</p>
+
+
+
+
+<p>となり、ガウス-ウィシャート分布といわれる。</p>
+
+
+
+
+<h3>混合ガウス分布<a id="orgheadline22"></a></h3>
+
+
+
+
+<p>複雑なデータに関して一つのガウス分布だけでは、うまく近似できないことがある
+複数個のガウス分布を重ねて混合ガウス分布にするとうまく近似できる
+混合ガウス分布は
+\[p(x)=\sum_{k=1}^{K}\pi_{k}N(x\mid\mu_{k},\sigma_{k})\]
+\[\sum_{k=1}^{K}\pi_{k}\]
+\[0\leq\pi_{k}\leq1\]
+で表される。
+\(N(x\mid\mu_{k},\sigma_{k})\)を混合要素、\(\pi_{k}\)を混合係数という。
+また、混合係数を事前分布、混合要素を条件付き分布としてみると
+\[p(x)=\sum_{k=1}^{K}p(k)p(x\mid k)\]
+と表せて、これを負荷率という。
+混合ガウス分布のパラメータの決定する方法について考える。
+最尤推定で求めるとして、対数尤度関数は、
+\[\ln p(X\mid \pi,\mu,\sigma)=\sum_{n=1}^{N}\ln{\sum_{k=1}^{K}\pi_{k}N(x_{n}\mid \mu_{k},\sigma_{k})}\]
+となる。これを解くためには、EMアルゴリズムなどを使う。</p>
+
+
+
+
+<h2>指数型分布族<a id="orgheadline24"></a></h2>
+
+
+
+
+<p>\[p(x\mid \eta)=h(x)g(\eta)\exp\{\eta^{T}u(x)\}\]
+で表されるのを指数型分布属という。
+指数型分布族の尤度関数を求めるのに、必要なデータの値を十分統計量という。
+指数型分布族では、一般に共役事前分布が存在する。
+事前分布の一つとして、事後分布のあまり影響を与えないようにする無情報事前分布というものがある。
+無情報事前分布の例として、平行移動不変性と、尺度不変性を持つ分布が挙げられる。
+平行移動不変性を持つ分布は、
+\[p(x\mid \mu)=f(x-\mu)\]
+で表され、\(\mu\)を位置パラメータという。この時、分布は定数となる
+尺度不変性を持つ分布は、
+\[p(x\mid \sigma)=\frac{1}{\sigma}f(\frac{x}{\sigma})\]
+で表され、\(\sigma\)は尺度パラメータという。この時、分布は、正規化できないので、変速事前分布と言われる。
+変速事前分布をとった場合でも、事後分布が正規化できる場合は使われる</p>
+
+
+
+
+<h2>ノンパラメトリック法<a id="orgheadline27"></a></h2>
+
+
+
+
+<p>事前分布などを用いたパラメータを用いる方法ではなく、データ点から分布モデルをつくることについて考える。
+D次元の分布p(x)からなるデータ点をもとに、p(x)を推定する。
+小さな領域Rごとに密度が一定とみなせるほど、Rが小さく、平均が真に近くなるほどRにデータ点が含まれると仮定すると、
+\[p(x)=\frac{K}{NV}\]
+で近似できる。Kは領域に含まれるデータ点の数、Nはデータ点の総数、Vは領域の体積。</p>
+
+
+
+
+<h3>カーネル密度推定<a id="orgheadline25"></a></h3>
+
+
+
+
+<p>Vを固定し、領域内に含まれうKによってp(x)を推定する。
+\[k(u)\geq0\]
+\[\int k(u)du=1\]
+を満たす任意の関数k(u)をカーネル関数として利用する。
+Kは、
+\[K=\sum_{n=1}^{N}k(\frac{x-x_{n}}{h})\]
+により推定される。
+このhがカーネル関数によって変換された空間の広さに値し、hを適切に選ぶとうまく近似できる。一般にカーネル関数には、ガウス関数が用いられる。</p>
+
+
+
+
+<h3>最近傍法<a id="orgheadline26"></a></h3>
+
+
+
+
+<p>Kを固定し、K個データ点が入るように、Vを決めp(x)を推定する。
+いわゆるk近傍法。クラスタリングとかに使われる。</p>
+
+
+  </p>
+  -->
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-08-15T16:20:44+09:00" pubdate data-updated="true"></time>
+    
+
+
+  </span>
+
+  
+</article>
+
+            </div>
+          </div>
         
           
           <div class="row">
