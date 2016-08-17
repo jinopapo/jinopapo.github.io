@@ -14,7 +14,7 @@
 
   
   <meta name="description" content=" とてもつらい
-猫とぷよぐらみんぐ about me 何がしたいかわからない、何ができるかわからない PRML2章 written Prml1 written window8.1でxubuntuをデュアルブート written 2015/12/03 All Posts ">
+猫とぷよぐらみんぐ about me 何がしたいかわからない、何ができるかわからない PRML3章 written PRML2章 written Prml1 written window8.1でxubuntuをデュアルブート written 2015/12/03 All Posts ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,240 @@
 
     <div class="article-list">
       <div class="container">
+        
+          
+          <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+              <article>
+  <h2><a href="/blog/2016/08/17/prml3/">PRML3章</a></h2>
+  <!--
+  
+  <p>
+    <h1>線形回帰モデル<a id="orgheadline34"></a></h1>
+
+
+
+
+<h2>線形基底関数モデル<a id="orgheadline29"></a></h2>
+
+
+
+
+<p>任意の関数を基底関数として、重みパラメータに関する線形関数をつくり、入力xに対して目的変数tを推定する問題について考える。
+最も簡単なモデルは、
+\[y(x,w)=w_{0}+w_{1}x_{1}+&hellip;+w_{D}x_{D}\]
+で表される。
+これは、あまりに表現力がないので、拡張すると、
+\[y(\mathbf{x},\mathbf{w})=w_{0}+\sum_{j=0}^{M-1}w_{j}\phi_{j}(\mathbf{x})\]
+となる。\(\phi_{j}(\mathbf{x})\)を基底関数という。
+また、\(w_{0}\)をバイアスパラメータという。
+基底関数には、ガウス基底関数や、シグモイド基底関数、フーリエ基底関数などが用いられる。
+最尤推定について考える。
+推定したい関数yの出力にガウスノイズを乗せたものを目標変数にする。
+\[t=y(x,w)+\epsilon\]
+\(\epsilon\)はガウス分布に従うので、
+\[p(t\mid x,w,\beta)=N(t\mid y(x,w),\beta^{-1})\]
+で表せる。
+誤差関数として、二乗損失関数を用いると最尤推定解は、条件付き期待値で与えられるので、
+\[E[t\mid x]=\int tp(t\mid x)dt=y(x,w)\]
+となる。
+ここで、入力X={\(x_{1},&hellip;,x_{N}\)}と目的変数T={\(t_{1},&hellip;t_{N}\)}からなるデータ集合について考える。
+二乗損失関数を用いて、対数尤度関数を考えると、
+\[p(T\mid X,w,\beta)=\sum_{n=1}^{N}\ln N(t_{n}\mid w^{T}\phi(x_{n}),\beta^{-1})\
+=\frac{N}{2}\ln\beta-\frac{N}{2}\ln(2\pi)-\beta E_{D}(W)\]
+\[E_{D}(w)=\frac{1}{2}\sum_{n=1}^{N}\{t_{n}-w_{\mathrm{T}}\phi(x_{n})\}\]
+となる。wの最尤推定解を求めると、
+\[w_{ML}=(\Phi^{\mathrm{T}}\Phi)^{-1}\Phi^{\mathrm{T}}\mathbf{t}\]
+となる。これは、最小二乗問題の正規方程式と言われる。\(\Phi\)は計画行列といわれ、その要素は、\(\Phi_{nj}=\phi_{j}(x_{n})\)であたえられる。
+\[\Phi'\equiv(\Phi^{\mathrm{T}}\Phi)^{-1}\Phi^{\Phi^{\mathrm{T}}}\]
+は、ムーア-アーペンローズの擬似逆行列と言われる。
+\(\beta\)の最尤推定を求めると、
+\[\frac{1}{\beta_{ML}}=\frac{1}{N}\sum_{n=1}^{N}\{t_{N}-w_{ML}^{\mathrm{T}\Phi(x_{n})}\}^{2}\]
+となる。
+逐次学習について考える。
+確率的勾配降下法を適用して、逐次学習する。
+誤差関数が、データ点の和からなっている場合、パラメータを
+\[w^{\tau+1}=w^{\tau}-\eta\nabla E_{n}\]
+を用いて更新していく。
+今回の場合は、二乗誤差を更新していく。
+また、過学習を防ぐために、正則化項を加えることを考えると誤差関数は、
+\[E_{D}(w)+\lambda E_{W}(w)\]
+で一般的に表せる。
+最も単純な正則化項は
+\[E_{W}(w)=\frac{1}{2}w^{\mathrm{T}}w\]
+で与えられる。これは、逐次学習中に必要のない基底関数の重みが0に近づいていくので、荷重減衰といわれる。</p>
+
+
+
+
+<h2>バイアスバリアンス分解<a id="orgheadline30"></a></h2>
+
+
+
+
+<p>モデルの複雑差について考える。
+線形基底関数モデルの期待二乗誤差は、
+\[E[L]=\int \{y(x)-h(x)\}^{2}p(x)dx+\int \int \{h(x)-t\}^{2}p(x,t)dxdt\]
+で表せる。h(x)は最適解を表す。
+第二項は、ノイズを表すため、第一項を最小にするy(x)を求めるのが理想となる。
+ここで、頻度主義での不確実性について考える。
+頻度主義では、不確実性を複数のデータセットの平均で与える。
+予測関数は、データセットごとで異なるので、y(x;D)で表す。
+期待二乗誤差の第一項を各データ集合ごとの期待値\(E_{D}[y(x;D)]\)を用いて展開し、期待値を取ると、
+\[E_{D}[\{y(x;D)-h(x)\}]=\{E_{D}[y(x;D)]-h(x)\}^{2}+E_{D}[\{y(x;D)-E_{D}[y(x;D)]\}^{2}]\]
+となる。第一項はバイアスといわれ、理想値の離れ具合を示す。第二項は、バリアンスといわれ、データに対する敏感さを表す。
+バリアンスとバイアスはトレードオフの関係にあり、適切に重みを選ぶ必要がある。
+実際には、複数のデータセットが与えられることが少ないので、別のアプローチのほうがよい</p>
+
+
+
+
+<h2>ベイズ線形回帰<a id="orgheadline31"></a></h2>
+
+
+
+
+<p>ベイズ的な視点から、線形回帰モデルを扱う。
+尤度関数\(P(t|w)\)がwのの二次関数の指数なので、事前分布は、
+\[p(w)=N(w\mid m_{0},S_{0})\]
+で表せる。
+条件付きガウス分布の式より事後分布は、
+\[p(w\mid t)=N(w\mid m_{N},S_{N})\]
+\[m_{N}=S_{N}(S_{0}^{-1}m_{0}+\beta\Phi^{\mathrm{T}}t)\]
+\[S_{N}^{-1}=S_{0}^{-1}+\beta\Phi^{\mathrm{T}}\Phi\]
+となる。
+簡単のため事前分布を、
+\[p(w\mid \alpha)=N(w\mid 0,\alpha^{-1}I)\]
+で表す。
+ここでは、パラメータwではなく目的変数tがほしいので、予測分布について考える。
+予測分布は、
+\[p(t|\mathbf{t},\alpha,\beta)=\int p(t|w,\beta)p(w|\mathbf{t},\alpha,\beta)dw\]
+で与えられる。
+目的変数の条件付き分布、パラメータの事後分布は、ともに正規分布なので、
+\[p(t|x,\mathbf{t},\alpha,\beta)=N(t|m_{N}^{T}\phi(x),\sigma^{2}_{N}(x))\]
+\[\sigma_{N}^{2}=\frac{1}{\beta}+\phi(x)^{T}S_{N}\phi(x)\]
+で表せる。
+事前分布は、未知のパラメータによって、ガンマ分布や、ガウスーガンマ分布をつかいわける。
+また、予測平均は、
+\[y(x,m_{N})=\sum_{n=1}^{N}\beta\phi(x)^{T}S_{N}\phi(x_{n})t_{n}\]
+で表わせ、目標変数tの線形結合として捉えれるので、
+\[y(x,m_{N})=\sum_{n=1}^{N}k(x,x_{n})t_{n}\]
+\[k(x,x^{\prime})=\beta\phi(x)^{\mathrm{T}}S_{N}\phi(x^{\prime})\]
+と表せる。\(k(x,x^{\prime})\)を等価カーネルといい、目標変数の線形結合で、予測する回帰関数を線形平滑器という。
+等価カーネルを用いると、各目標変数に重みを与えて、その線形結合で、新しいxに対する予測を出力することができる。</p>
+
+
+
+
+<h2>ベイズモデル比較<a id="orgheadline32"></a></h2>
+
+
+
+
+<p>ベイズの立場からのモデルの比較について考える。
+頻度主義では、クロスバリデーションなどにでテスト用にデータをとって確認したが、ベイズでは一つのデータでできる。
+L個のモデル\(M_{i}(i=1,&hellip;,L)\)について比較することを考える。
+ベイズの定理を用いて、訓練集合Dが与えられた時の、モデルの事後分布
+\[p(M_{i}|D)\propto p(M_{i})p(D|M_{i})\]
+を評価する。この時の\(p(D|M_{i})\)は、モデルエビデンスといわれ、データから見たモデルの好みを表す。
+二つのモデルのエビデンスの比を、ベイズ因子という。
+モデルエビデンスは、
+\[p(D|M_{i})=\int p(D|w,M_{i})p(w|M_{i})dw\]
+で表わせ、尤度関数のパラメータwに関する周辺化として、捉えることもできる。
+モデル選択により選ばれるモデルは、ベイズの観点においては、中間くらいの複雑さのモデルが選ばれる。</p>
+
+
+
+
+<h2>エビデンス近似<a id="orgheadline33"></a></h2>
+
+
+
+
+<p>事前分布のパラメータ\(\alpha\)、尤度関数のパラメータ\(\beta\)に関しても、データから推定することを考える。
+ここでは、パラメータwに関して周辺化した周辺尤度を最大にするように、ハイパーパラメータ\(\alpha、\beta\)を決めるエビデンス近似について考える。
+ハイパーパラメータに事前分布を追加すると、予測分布は、
+\[p(t|\mathbf{t})=\int \int \int p(t|w,\beta)p(w|\mathbf{t},\alpha,\beta)p(\alpha,\beta|\mathbf{t})d\alpha d\beta dw\]
+と表せる。入力xは省略。
+事後分布\(p(\alpha,\beta|\mathbf{t})\)が\(\hat{\alpha}、\hat{\beta}\)で尖ってているとしたとき、予測分布は、
+\[p(t|\mathbf{t},\hat{\alpha},\hat{\beta})=\int p(t|w,\hat{\beta})p(w|\mathbf{t},\hat{\alpha},\hat{\beta})dw\]
+で表されるwの周辺化で近似できる。
+ここで事後分布\(p(\alpha,\beta|\mathbf{t})\)について考える。
+ベイズの定理より、
+\[p(\alpha,\beta|\mathbf{t})\propto p(\mathbf{t}|\alpha,\beta)p(\alpha,\beta)\]
+で事後分布が表される。
+事前分布が比較的平坦なとき、尤度関数を最大にすることで、\(\hat{\alpha}\)と\(\hat{\beta}\)を得ることができる。
+最大にするには、導関数を0とおき、方程式を解く方法とEMアルゴリズムを使う方法がある。
+ここでは、方程式を解く方法について考える。
+周辺尤度関数\(p(\mathbf{t}|\alpha,\beta)\)は、
+\[p(\mathbf{t}|\alpha,\beta)=\int p(\mathbf{t}|w,\beta)p(w|\alpha)dw\]
+で表すことができる。ここで、wの事前分布が\(N(w|0,\alpha^{-1})\)、尤度関数が、\(N(t|w^{\mathrm{T}}\phi(x),\beta^{-1})\)なので、
+\[p(\mathbf{t}|\alpha,\beta)=(\frac{\beta}{2\pi})^{\frac{N}{2}}(\frac{\alpha}{2\pi})^{\frac{M}{2}}\int\exp\{-E(w)\}dw\]
+\[E(w)=\frac{\beta}{2}||\mathbf{t}-\Phi w||^{2}+\frac{\alpha}{2}w^{T}w\]
+と式変形ができる。
+ここで、\(E(w)\)をwに関して平方完成すると、
+\[E(w)=E(m_{n})+\frac{1}{2}(w-m_{N})^{\mathrm{T}}A(w-m_{N})\]
+\[E(m_{N})=\frac{\beta}{2}||\mathbf{t}-\Phi m_{N}||^{2}+\frac{\alpha}{2}m_{N}^{T}m_{N}\]
+\[A=\alpha I+\beta\Phi^{\mathrm{T}}\Phi\]
+\[m_{N}=\beta A^{-1}\Phi^{T}\mathbf{t}\]
+と表せる。このとき、\(m_{N}\)は事後分布の平均になる。
+以上より対数尤度を取ると、
+\[\ln p(\mathbf{t}|\alpha,\beta)=\frac{M}{2}\ln\alpha+\frac{N}{2}\ln\beta-E(m_{N})-\frac{1}{2}\ln|A|-\frac{N}{2}\ln(2\pi)\]
+となる。
+最初に、\(\alpha\)について考える。
+まず、\(\ln|A|\)の微分について考える。
+固有ベクトル方程式
+\[(\beta\Phi^{\mathrm{T}}\Phi)u_{i}=\lambda_{i}u_{i}\]
+より、\(A\)は固有値\(\alpha-\lambda_{i}\)をもつので、
+\[\frac{d}{d\alpha}\ln|A|=\sum_{i}\frac{1}{\lambda_{i}+\alpha}\]
+となる。
+よって導関数を0とおくと、
+\[0=\frac{M}{2\alpha}-\frac{1}{2}m_{N}^{\mathrm{T}}m_{N}-\frac{1}{2}\sum_{i}\frac{1}{\lambda_{i}+\alpha}\]
+\[\alpha m_{N}^{\mathrm{T}}m_{N}=M-\alpha\sum_{i}\frac{1}{\lambda_{i}+\alpha}\]
+\[\alpha m_{N}^{\mathrm{T}}m_{N}=\sum_{i}\frac{\lambda_{i}}{\lambda_{i}+\alpha}\]
+となる。
+この時の右辺を、\(\gamma\)とおくと、\(\alpha\)の最尤推定解は、
+\[\alpha=\frac{\gamma}{m_{N}^{\mathrm{T}}m_{N}}\]
+を満たすことがわかる。これは、最初に、\(\lambda\)と\(m_{N}\)を決め、\(\alpha\)を更新していき、収束するまで繰り返していくことで解ける。
+次に\(\beta\)について考える。
+\[\frac{d\lambda_{i}}{d\beta}=\frac{\lambda_{i}}{\beta}\]
+より、
+\[\frac{d}{d\beta}\ln|A|=\frac{\gamma}{\beta}\]
+なので、導関数を0とおくと、
+\[0=\frac{N}{2\beta}-\frac{1}{2}\sum_{n=1}^{N}\{t_{n}-m_{N}^{\mathrm{T}}\phi(x_{n})\}^{2}-\frac{\gamma}{2\beta}\]
+\[\frac{1}{\beta}=\frac{1}{N-\gamma}\sum_{n=1}^{N}\{t_{n}-m_{N}^{\mathrm{T}}\phi(x_{n})\}^{2}\]
+となる。これもさっきと同じように繰り返し計算して解ける。
+また、この時、\(\gamma\)はデータによって影響を受けるパラメータ数、有効パラメータ数を示す。</p>
+
+
+  </p>
+  -->
+  <span class="meta">
+    written 
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-08-17T14:57:07+09:00" pubdate data-updated="true"></time>
+    
+
+
+  </span>
+
+  
+</article>
+
+            </div>
+          </div>
         
           
           <div class="row">
