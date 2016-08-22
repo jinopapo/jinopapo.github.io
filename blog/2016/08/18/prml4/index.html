@@ -83,7 +83,7 @@
 <h2>識別関数<a id="orgheadline38"></a></h2>
 
 <p>最も簡単な線形識別関数は、
-\[y(x)=w^{\mathrm{T}x+w_{0}}\]
+\[y(x)=w^{\mathrm{T}}x+w_{0}\]
 で表され、\(w\)を重みベクトル、\(w_{0}\)をバイアスパラメータという。またバイアスパラメータのマイナスは、しきい値パラメータと呼ばれる。
 このとき、決定面は、\(y(x)=0\)であたえられる。この時、wは決定面に直行し、y(x)は、xからの直行距離を表す。
 他クラスに分類する場合、クラスに属すかいないかを決める関数を複数個組み合わせる1対他分類器や、
@@ -107,7 +107,7 @@
 \[E_{D}(\mathbf{W})=\frac{1}{2}\mathrm{Tr}\{(\mathbf{XW}-\mathbf{T})^{\mathrm{T}}(\mathbf{XW}-\mathbf{T})\}\]
 となる。また、\(\mathbf{X}\)の要素は、\(\mathbf{x}_{n}^{\mathrm{T}}\)、\(\mathbf{T}\)の要素は、\(t_{n}^{\mathrm{T}}\)となる。
 二乗誤差の導関数を0として解くと、
-\[\mathbf{W}=(\mathbf{X}^{\mathrm{T}}\mathbf{X})\mathbf{X}^{\mathrm{T}\mathbf{T}}\]
+\[\mathbf{W}=(\mathbf{X}^{\mathrm{T}}\mathbf{X})\mathbf{X}^{\mathrm{T}}\mathbf{T}\]
 となる。
 よって識別関数は、
 \[y(x)=\mathbf{T}^{\mathrm{T}}\mathbf{X}^{\dag\mathrm{T}}\mathbf{x}\]
@@ -147,12 +147,12 @@
 となる。Wは、\(w_{k}\)を列の要素としている。
 クラス内分散を考えると、
 \[S_{W}=\sum_{k=1}^{K}S_{k}\]
-\[S_{k}=\sum_{n\in C_{k}}(x_{n}-m_{k})(x_{n}-m_{k})^{mathrm{T}}\]
+\[S_{k}=\sum_{n\in C_{k}}(x_{n}-m_{k})(x_{n}-m_{k})^{\mathrm{T}}\]
 \[m_{k}=\frac{1}{N}\sum_{n\in C_{k}}x_{n}\]
 となる。
 次に、総分散行列を考えると、
 \[S_{T}=\sum_{n=1}^{N}(x_{n}-m)(x_{n}-m)^{\mathrm{T}}\]
-\[m=\frac{1}{N}\sum_{n=1}^{N}N_{k}m_{k}\]
+\[m=\frac{1}{N}\sum_{k=1}^{K}N_{k}m_{k}\]
 となる。
 また、総分散行列は、総クラス間分散とクラス内分散に分解できるので、
 \[S_{T}=S_{W}+S_{B}\]
@@ -218,11 +218,11 @@
 となる。同様に、\(\mu_{2}\)についても、
 \[\mu_{2}=\frac{1}{N_{2}}\sum_{n=1}^{N}t_{n}x_{n}\]
 となる。
-最後に\(Sigma\)について考える。
+最後に\(\Sigma\)について考える。
 対数尤度をとり、正規分布の標準的な最尤推定解をみると、
 \[\Sigma=\frac{N_{1}}{N}S_{1}+\frac{N_{2}}{N}S_{2}\]
-\[S_{1}=\frac{1}{N_{1}}\sum_{n\in C_{1}}(x_{n}-\mu_{1})(x_{n}-mu_{1})^{\mathrm{T}}\]
-\[S_{2}=\frac{1}{N_{2}}\sum_{n\in C_{2}}(x_{n}-\mu_{2})(x_{n}-mu_{1})^{\mathrm{T}}\]
+\[S_{1}=\frac{1}{N_{1}}\sum_{n\in C_{1}}(x_{n}-\mu_{1})(x_{n}-\mu_{1})^{\mathrm{T}}\]
+\[S_{2}=\frac{1}{N_{2}}\sum_{n\in C_{2}}(x_{n}-\mu_{2})(x_{n}-\mu_{2})^{\mathrm{T}}\]
 となる。
 離散的な入力の場合について考える。
 この時、条件付き確率が、ベルヌーイ分布の尤度関数と一致するので、それに置き換えて同じように計算する。
@@ -238,7 +238,7 @@
 となる。このモデルをロジスティクス回帰という。
 尤度関数について考える。
 教師データを\(\{\phi_{n},t_{n}\}\)とすると、尤度関数は、
-\[p(\mathbf{t}|w)=\prod_{n=1}^{N}y_{n}^{t_{n}}\{1-y_{n}^{1-t_{n}}\}\]
+\[p(\mathbf{t}|w)=\prod_{n=1}^{N}y_{n}^{t_{n}}\{1-y_{n}}^{1-t_{n}\}\]
 となる。負の対数尤度を取ると、
 \[E(W)=-\sum_{n=1}^{N}\{t_{n}\ln y_{n}+(1-t_{n})\ln(1-y_{n})\}\]
 となる。これは交差エントロピー誤差関数と言われる。
@@ -255,7 +255,7 @@
 となる。\(\mathbf{R}\)がパラメータを含んでいるので、\(\mathbf{R}\)を先に決め、パラメータを更新するのを繰り返す。
 多クラスについて考える。
 事後確率は、ソフトマックス関数によって与えられたので、
-\[\[p(C_{k}|x)=\frac{\exp(a_{k})}{\sum_{j}\exp(a_{j})}=y(\phi)\]
+\[p(C_{k}|x)=\frac{\exp(a_{k})}{\sum_{j}\exp(a_{j})}=y(\phi)\]
 \[a_{k}=w_{k}^{\mathrm{T}}\phi\]
 となる。
 尤度関数は、
@@ -360,6 +360,8 @@
           <a class="pull-left" href="/blog/2016/08/17/prml3/" title="Previous Post: PRML3章">&laquo; Previous: PRML3章</a>
         
 
+        
+          <a class="pull-right" href="/blog/2016/08/22/prml5/" title="Next Post: prml5章">Next: prml5章 &raquo;</a>
         
       </div>
     </div>

@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Prml5章 - とてもつらい</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Prml5章 written ニューラルネットワーク 今まで自分たちで基底関数を考えてきたが、基底関数の数だけ決めて、あとは、全部学習で決める。 フィードフォワードネットワーク関数 基本的なニューラルネットワークにおけるモデルは、
+\[z_{j}=h(a_{j})\]
+\[a_{j}=\sum_ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jinopapo.github.io/blog/2016/08/22/prml5">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="とてもつらい" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Prml5章</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-08-22T15:21:09+09:00" pubdate data-updated="true"></time>
+          
+
+
+        </div>
+        <h1>ニューラルネットワーク<a id="orgheadline53"></a></h1>
+
+<p>今まで自分たちで基底関数を考えてきたが、基底関数の数だけ決めて、あとは、全部学習で決める。</p>
+
+<h2>フィードフォワードネットワーク関数<a id="orgheadline45"></a></h2>
+
+<p>基本的なニューラルネットワークにおけるモデルは、
+\[z_{j}=h(a_{j})\]
+\[a_{j}=\sum_{i=1}^{D}w_{ji}x_{i}+w_{j0}\]
+となる。\(D\)は入力次元数、\(w\)は重みパラメータ、\(w_{0}\)はバイアスを表す。\(h()\)は活性化関数と言われ、シグモイド関数がおもに用いられる。
+ニューラルネットワークでは、\(z_{k}\)をユニットといい、ユニットをつなげて、ネットワークを作り、それに応じて出力する。ユニットに入力を与えて出力を得るのをフォワードプロパゲーションという。
+出力値として使われるユニット以外を隠れユニットという。
+またニューラルネットワークは、ユニット同士の入力結合のパラメータと出力結合のパラメータを入れ替えたり、パラメータの一部の符号を反転させても同じ出力が得られるので、同じ関数で自由度がユニット数を\(M\)とすると\(M!2^{M}\)ある。</p>
+
+<h2>学習<a id="orgheadline46"></a></h2>
+
+<p>ニューラルネットワークでは、誤差関数を最小にすることで尤度関数を最大にすることと同じ結果を得ている。
+誤差を最小にするのは、誤差関数で表される曲面で極小値を見つけることになる。ニューラルネットワークでは、バックプロパゲーションで勾配情報を計算し、勾配情報を元に確率的勾配硬化法を使い、極小値を求める。
+バックプロパゲーションについて考える。
+まず始めにフォワードプロパゲーションを行いユニットの入力値\(a_{j}\)と、ユニットの値\(z_{j}\)を求める。
+次に、誤差関数の微分を考える、
+誤差関数の微分は、
+\[\frac{\partial E_{n}}{\partial w_{ji}}=\frac{\partial E_{n}}{\partial a_{j}}\frac{\partial a_{j}}{\partial w_{ji}}\]
+となる。ここで、
+\[\frac{\partial a_{j}}{\partial w_{ji}}=z_{i}\]
+となる。ここで、
+\[\frac{\partial E_{n}}{\partial a_{j}}=\delta_{j}\]
+とする。これは、誤差を呼ばれる。
+出力ユニットにおいて、活性化関数に正準連結関数を用いて場合誤差は、
+\[\delta_{k}=y_{k}-t_{k}\]
+となる。また、隠れユニットの誤差は、出力ユニットの誤差を利用して、
+\[\delta_{j}=h'(a_{j})\sum_{k}w_{kj}\delta_{k}\]
+となる。このように出力から逆に誤差を伝搬していき、伝搬された値をもとに、誤差関数の微分を求めることができる。
+また、実装の際には、極小幅での中心差分での近似を用いて確認するのがよい。
+また複数のネットワークの組み合わせの場合には、誤差関数の微分は、
+\[\frac{\partial E}{\partial w}=\sum_{k,j}\frac{\partial E}{\partial y_{k}}\frac{\partial y_{k}}{\partial z_{j}}\frac{\partial z_{j}}{\partial w}\]
+よなる、右辺の真ん中の項は、ヤコビ行列になる。
+ヤコビ行列は、バックプロパゲーションと同じ用に、順伝搬して、出力ユニットの活性化関数に応じた誤差を伝搬させ、各要素を計算する。</p>
+
+<h2>ヘッセ行列<a id="orgheadline47"></a></h2>
+
+<p>一次微分のヤコビ行列だけでなく、二次微分のヘッセ行列\((W*W)\)も求めておくといいことがある。例えば、最適化アルゴリズムや、再学習アルゴリズムなどに使うことができる。
+対角化で近似することを考える。
+この時対角成分は、
+\[\frac{\partial^{2} E_{n}}{\partial w_{ji}^{2}}=\frac{\partial^{2} E_{n}}{\partial a_{j}^{2}}z_{i}^{2}\]
+となる。右辺の二次微分は、連鎖法則を再帰的に用いることで求められ、非対角項を無視して、
+\[\frac{\partial^{2} E_{n}}{\partial a_{j}^{2}}=h'(a_{j})^{2}\sum_{k}w_{kj}^{2}\frac{\partial^{2} E_{n}}{\partial a_{k}^{2}}+h'&lsquo;(a_{j})\sum_{k}w_{kj}\frac{\partial E_{n}}{\partial a_{j}}\]
+となる。実際のヘッセ行列は、非対角なので、これだとうまく近似できない場合が多い。
+そこで、外積による近似を考える。誤差関数に、二乗誤差を用いているときを考えると、ヘッセ行列は、
+\[H=\sum_{n=1}^{N}\nabla y_{n}(\nabla y_{n})^{\mathrm{T}}+\sum_{n=1}^{N}(y_{n}-t_{n})\nabla\nabla y_{n}\]
+となる。ここで、第二項は非常に小さく無視できるので、
+\[H\simeq\sum_{n=1}^{N}b_{n}b_{n}^{\mathrm{T}}\]
+\[b_{n}=\nabla a_{n}\]
+で近似できる。これを外積による近似またはLevenberg-Marquardt近似という。
+他の誤差関数でも、同じように二次微分の二項を無視した形で近似できる。
+外積による近似を用いて、逆行列を効率的に求めることを考える。
+ヘッセ行列を逐次的に求めるとすると、
+\[H_{L+1}=H_{L}+b_{L+1}b_{L+1}^{\mathrm{T}}\]
+となる。ここで、Woodburyの公式を使うと、逆行列は、
+\[H_{L+1}^{-1}=H_{L}^{-1}-\frac{H_{L}^{-1}b_{L+1}b_{L+1}^{\mathrm{T}}H_{L}^{-1}}{1+b_{L+1}^{\mathrm{T}}H_{L}^{-1}b_{L+1}}\]
+で更新できる。
+またヘッセ行列は、ほとんどベクトルとの積で用いられる。そこで、直接ベクトルとの積を求めることを考える。ベクトルとの積は、
+\[v^{\mathrm{T}}H=v^{\mathrm{T}}\nabla(\nabla E)=R\{\nabla E\}\]
+で表される。これより、計算するときに、
+\[R{w}=v\]
+として同じように計算するといいことがわかる。</p>
+
+<h2>正則化<a id="orgheadline50"></a></h2>
+
+<p>ニューラルネットワークにおける正則化について考える。
+今まで通りの荷重減衰の正則化項では、無矛盾性を持っていないのでうまくいかない。
+無矛盾性とは、入力または、教師データを線形変換させたときに、線形変換分重みだけがことなるモデルが作れること。
+無矛盾性を持っていないと、線形変換した同じベクトルを別のクラスに分類したりしてしまう。
+ここで、簡単なものとして、変速事前分布を仮定して、無矛盾性をもつ正則化項を表すと
+\[\sum_{k}\frac{\lambda_{k}}{2}\sum_{w\in W_{k}}w^{2}\]
+となる。また事前分布は、
+\[p(w)\propto\exp(\frac{1}{2}\sum_{k}\alpha_{k}||w||^{2}_{k})\]
+となる。
+また別の正則化の方法として、学習が進むと有効パラメータが増えることを利用して、学習用データの誤差が最小のとこではなく、テストデータの値が最小になるようなとこで学習をやめる方法がある。
+正則化を加えることで、不変性を得ることがある。不変性を持っていると、同じ画像を線形変換した物でも同じクラスに分類したりすることができる。
+方法として、</p>
+
+<ul>
+<li>教師データに線形変換したものをつくrい教師データの量を増やす。</li>
+<li>正則化項を加えることで、入力に対して出力が変化したらペナルティを課すようにする。接線伝播法といわれる。</li>
+<li>入力に線形変換で不変となるような特徴量を使う。</li>
+<li>ニューラルネットワークに不変性を担保するような構造を組み込む。例えば、CNNとか局所的な情報など。</li>
+</ul>
+
+
+<p>などがある。</p>
+
+<h3>接線伝播法<a id="orgheadline48"></a></h3>
+
+<p>入力を変換してできる新しい入力集合をMとすると、変換の影響は、局所的には接ベクトルで近似できることを利用し誤差関数を抑える方法。
+変換がパラメータ\(\xi\)で決まるとして、入力を変換したものを\(s(x_{n,\xi})\)とすると、接ベクトルは、
+\[\tau_{n}=\frac{\partial s(x_{n,\xi})}{\partial \xi}|_{\xi=0}\]
+となる。出力を\(\xi\)で微分すると、
+\[\frac{\partial y_{k}}{\partial \xi}|_{\xi=0}=\sum_{i=1}^{D}J_{ki}\tau_{i}\]
+となる。これを利用すると誤差関数は、
+\[\hat{E}=E+\lambda\Omega\]
+\[\Omega=\frac{1}{2}\sum_{n}\sum_{k}(\sum_{i=1}^{D}J_{ki}\tau_{i})^{2}\]
+となる。こうすることで、入力と出力の変化に応じたペナルティが付き、不変性を得ることができる。</p>
+
+<h3>ソフト重み共有<a id="orgheadline49"></a></h3>
+
+<p>あるグループに属する重みはすべて同じ重みを使うような正則化項を入れることで、複雑さを抑える。
+単純な荷重減衰では、事前分布に正規分布を選んでいたのですべての重みを同じように扱ったが、ここでは、事前分布に混合ガウス分布を使うことで、複数グループに分けて扱う。
+誤差関数は、
+\[\hat{E}(w)=E(w)+\Omega(w)\]
+\[\Omega(w)=-\sum_{i}\ln(\sum_{j=1}^{M}\pi_{j}N(w_{i}|\mu_{j},sigma_{i}^{2}))\]
+となる。これを最小にするには、共役勾配法や、準ニュートン法などを使う。</p>
+
+<h2>混合密度ネットワーク<a id="orgheadline51"></a></h2>
+
+<p>答えが複数あるような問題いおいては、直接ニューラルネットワークで扱うのは向いていない。
+こういう問題では、多峰性をもっているため、ニューラルネットワークだと変なところに収束する。
+そこで、事後分布\(p(t|x)=\sum_{k=1}^{K}\pi_{k}N(t|\mu_{k},\sigma^{2}_{k}I)\)パラメータを出力するネットワークを考える。
+混合係数の出力ユニットにはソフトマックス関数、分散の出力ユニットにはexp関数、平均の出力ユニットには、線形関数を使うとよい。
+誤差関数には、
+\[E(w)=-\sum_{n=1}^{N}\ln\{\sum_{k=1}^{K}\pi_{k}(x{n},w)N(t_{n}|\mu_{k}(x_{n},w),\sigma_{k}^{2}(x_{n},w)I)\}\]
+を用いる。
+また、各パラメータの微分は、
+\[\frac{\partial E_{n}}{\partial a_{k}^{\pi}}=\pi_{k}-\gamma_{nk}\]
+\[\frac{\partial E_{n}}{\partial a_{k}^{\mu}}=\gamma_{nk}\{\frac{\mu_{kl}-t_{kl}}{\sigma^{2}_{k}}\}\]
+\[\frac{\partial E_{n}}{\partial a_{k}^{\sigma}}=\gamma_{nk}(L-\frac{||t_{n}-\mu_{k}||^{2}}{\sigma^{2}_{k}})\]
+\[\gamma_{nk}(t_{n}|x_{n})=\frac{\pi_{k}N_{nk}}{\sum_{l=1}^{K}\pi_{l}N_{nl}}\]
+となる。</p>
+
+<h2>ベイズネットワーク<a id="orgheadline52"></a></h2>
+
+<p>ニューラルネットワークをベイズ的に扱うことを考える。極大値をピークとする正規分布をラプラス近似し、局所的に見てパラメータに線形な形で近似する。
+事後分布が正規分布であるとすると、
+\[p(t|x,w,\beta)=N(t|y(x,w),\beta^{-1})\]
+となる。この時の重みの事前分布は、
+\[p(w|\alpha)=N(w|0,\alpha^{-1}I)\]
+となる。ここで、教師データDが与えられた時の尤度関数は、
+\[p(D|w,\beta)=\prod_{n=1}^{N}N(t_{n}|y(x_{n},w),\beta^{-1})\]
+となり、事後分布は、
+\[p(w|D,\alpha,\beta)\propto p(w|\alpha)p(D|w,\beta)\]
+となる。ここで、事後分布をラプラス近似して、正規分布を求める。
+\(\alpha\)、\(\beta\)が固定であるとすると、極大値は、誤差伝播で求められる。極大値をモードとしてラプラス近似すると正規分布は、
+\[q(w|D)=N(w|w_{MAP},A^{-1})\]
+\[A=-\alpha I+\beta H\]
+となる。Hは、\(w_{MAP}\)の時のヘッセ行列。またニューラルネットワークの出力は非線形だが、ニューラルネットワークの出力の変化が、wの変化に比べて小さいとすると、\(w_{MAP}\)周りでテイラー級数展開でき、
+\[y(x,w)\simeq y(x,w_{MAP})+g^{\mathrm{T}}(w-w_{MAP})\]
+\[g=\nabla_{w}y(x,w)|_{w=w_{MAP}}\]
+となり、線形ガウス分布で近似できた。よって予測分布は、
+\[p(t|x,D,\alpha,\beta)=N(t|y(x,w_{MAP})|\sigma^{2}(x))\]
+\[\sigma^{2}(x)=\beta^{-1}+g^{\mathrm{T}}A^{-1}g\]
+となる。これまで、ハイパーパラメータを固定にしてきたが、ハイパーパラメータの求め方について考える。
+ハイパーパラメータの周辺尤度は、
+\[p(D|\alpha,\beta)=\int p(D|w,\beta)p(w|\alpha)dw\]
+で表され、対数尤度を最大にするようなパラメータを求めればよい。
+まず、\(\alpha\)について最大化する。固有方程式を、
+\[\beta Hu_{i}=\lambda_{i}u_{i}\]
+とすると、
+\[\alpha=\frac{\gamma}{w_{MAP}^{\mathrm{T}}w_{MAP}}\]
+\[\gamma=\sum_{i=1}^{W}\frac{\lambda_{i}}{\alpha+\lambda_{i}}\]
+となる。\(beta\)について最大化すると、
+\[\frac{1}{\beta}=\frac{1}{N-\gamma}\sum_{n=1}^{N}\{y(x_{n},w_{MAP})-t_{n}\}^{2}\]
+となる。ハイパーパラメータを更新することで、\(w_{MAP}\)が変わるので、事後分布とハイパーパラメータを交互に更新して求めることができる。</p>
+
+
+        <hr class="divider-short"/>
+
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2016/08/18/prml4/" title="Previous Post: prml4">&laquo; Previous: prml4</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    <a href="https://twitter.com/jinopapo"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+
+    
+    <a href="https://github.com/jinopapo"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+    
+  </body>
+</html>
